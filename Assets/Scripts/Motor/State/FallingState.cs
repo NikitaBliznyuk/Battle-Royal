@@ -3,25 +3,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WalkingState : BaseState
+public class FallingState : BaseState
 {
     public override Vector3 ProcessMotion(Vector3 input)
     {
         ApplySpeed(ref input, motor.Speed);
 
+        ApplyGravity(ref input, motor.Gravity);
+
         return input;
-    }
-
-    public override void Construct()
-    {
-        base.Construct();
-
-        motor.VerticalVelocity = 0.0f;
     }
 
     public override void Transition()
     {
-        if (!motor.Grounded())
-            motor.ChangeState("FallingState");
+        if (motor.Grounded())
+            motor.ChangeState("WalkingState");
     }
 }

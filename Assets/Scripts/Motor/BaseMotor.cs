@@ -10,9 +10,15 @@ public abstract class BaseMotor : MonoBehaviour
 
     private float baseSpeed = 5.0f;
     private float baseGravity = 25.0f;
+    private float terminalVelocity = 30.0f;
+    private float groundRayDistance = 0.5f;
+    private float groundRayInnerOffset = 0.1f;
 
     public float Speed { get { return baseSpeed; } }
     public float Gravity { get { return baseGravity; } }
+    public float TerminalVelocity { get { return terminalVelocity; } }
+
+    public float VerticalVelocity { set; get; }
     public Vector3 MoveVector { set; get; }
 
     protected abstract void UpdateMotor();
@@ -34,5 +40,49 @@ public abstract class BaseMotor : MonoBehaviour
     protected virtual void Move()
     {
         controller.Move(MoveVector * Time.deltaTime);
+    }
+
+    public virtual bool Grounded()
+    {
+        RaycastHit hit;
+        Vector3 ray;
+
+        float yRay = controller.bounds.center.y - controller.bounds.extents.y + 0.3f;
+        float centerX = controller.bounds.center.x, centerZ = controller.bounds.center.z;
+        float extentX = controller.bounds.extents.x - groundRayInnerOffset,
+            extentZ = controller.bounds.extents.z - groundRayInnerOffset;
+
+        // Middle Raycast
+        ray = new Vector3(centerX, yRay, centerZ);
+        Debug.DrawRay(ray, Vector3.down, Color.blue);
+        if (Physics.Raycast(ray, Vector3.down, out hit, groundRayDistance))
+        {
+            return true;
+        }
+
+        // Side Raycasts
+        for (int i = -1; i <= 1; i += 2)
+        {
+            for(int j = -1; j <= 1; j+=2)
+            {
+                ray = new Vector3(centerX + i * extentX, yRay, centerZ + j * extentZ);
+                Debug.DrawRay(ray, Vector3.down, Color.blue);
+                if (Physics.Raycast(ray, Vector3.down, out hit, groundRayDistance))
+                {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    public void ChangeState(string stateName)
+    {
+        System.Type type = System.Type.GetType(stateName);
+
+        state.Destruct();
+        state = gameObject.AddComponent(type) as BaseState;
+        state.Construct();
     }
 }

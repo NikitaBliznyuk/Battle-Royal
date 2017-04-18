@@ -10,6 +10,9 @@ public class PlayerMotor : BaseMotor
         // Send input to a filter
         MoveVector = state.ProcessMotion(MoveVector);
 
+        // Check if we need to change current state
+        state.Transition();
+
         // Move
         Move();
     }

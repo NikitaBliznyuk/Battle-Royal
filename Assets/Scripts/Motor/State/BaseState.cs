@@ -31,4 +31,18 @@ public abstract class BaseState : MonoBehaviour
     {
         return transform.rotation;
     }
+
+    protected void ApplySpeed(ref Vector3 input, float speed)
+    {
+        input *= speed;
+    }
+
+    protected void ApplyGravity(ref Vector3 input, float gravity)
+    {
+        motor.VerticalVelocity -= gravity * Time.deltaTime;
+
+        motor.VerticalVelocity = Mathf.Clamp(motor.VerticalVelocity, -motor.TerminalVelocity, motor.TerminalVelocity);
+
+        input.y = motor.VerticalVelocity;
+    }
 }
