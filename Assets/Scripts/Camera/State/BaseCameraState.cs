@@ -27,4 +27,17 @@ public abstract class BaseCameraState : MonoBehaviour
     {
         return transform.rotation;
     }
+
+    protected float ClampAngle(float angle, float min, float max)
+    {
+        do
+        {
+            if (angle < -360.0f)
+                angle += 360.0f;
+            else if (angle > 360.0f)
+                angle -= 360.0f;
+        } while (angle < -360 || angle > 360);
+
+        return Mathf.Clamp(angle, min, max);
+    }
 }
