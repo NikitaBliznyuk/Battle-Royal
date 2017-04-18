@@ -2,6 +2,16 @@
 
 public class PlayerMotor : BaseMotor
 {
+    private CameraMotor cameraMotor;
+
+    protected override void Start()
+    {
+        base.Start();
+
+        cameraMotor = gameObject.AddComponent<CameraMotor>();
+        cameraMotor.Init();
+    }
+
     protected override void UpdateMotor()
     {
         // Gets the input
