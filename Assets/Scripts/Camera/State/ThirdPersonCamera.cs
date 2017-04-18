@@ -9,11 +9,11 @@ public class ThirdPersonCamera : BaseCameraState
     private Transform cameraContainer;
 
     private Vector3 offset = Vector3.up;
-    private float distance = 10.0f;
+    private float distance = 5.0f;
     private float currentX = 0.0f;
     private float currentY = 0.0f;
-    private float sensivityX = 4.0f;
-    private float sensivityY = 1.0f;
+    private float sensivityX = 7.0f;
+    private float sensivityY = 4.0f;
 
     public override void Construct()
     {
