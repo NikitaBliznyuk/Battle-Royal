@@ -47,8 +47,7 @@ public abstract class BaseMotor : MonoBehaviour
 
     protected virtual void Rotate()
     {
-        if(RotationQuaternion != Quaternion.identity)
-            thisTransform.rotation = RotationQuaternion;
+        thisTransform.rotation = RotationQuaternion;
     }
 
     public virtual bool Grounded()
