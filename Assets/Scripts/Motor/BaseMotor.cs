@@ -10,6 +10,7 @@ public abstract class BaseMotor : MonoBehaviour
 
     private float baseSpeed = 5.0f;
     private float baseGravity = 25.0f;
+    private float baseJumpForce = 7.0f;
     private float terminalVelocity = 30.0f;
     private float groundRayDistance = 0.5f;
     private float groundRayInnerOffset = 0.1f;
@@ -17,6 +18,7 @@ public abstract class BaseMotor : MonoBehaviour
     public float Speed { get { return baseSpeed; } }
     public float Gravity { get { return baseGravity; } }
     public float TerminalVelocity { get { return terminalVelocity; } }
+    public float JumpForce { get { return baseJumpForce; } }
 
     public float VerticalVelocity { set; get; }
     public Vector3 MoveVector { set; get; }
