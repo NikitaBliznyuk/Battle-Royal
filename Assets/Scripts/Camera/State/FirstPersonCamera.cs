@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class FirstPersonCamera : BaseCameraState
 {
@@ -17,7 +14,7 @@ public class FirstPersonCamera : BaseCameraState
 
     public override Vector3 ProcessMotion(Vector3 input)
     {
-        return transform.position + Vector3.up * offset;
+        return transform.position + transform.up * offset;
     }
 
     public override Quaternion ProcessRotation(Vector3 input)
