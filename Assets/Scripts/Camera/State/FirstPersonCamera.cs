@@ -12,8 +12,8 @@ public class FirstPersonCamera : BaseCameraState
 
     private float currentX = 0.0f;
     private float currentY = 0.0f;
-    private float sensivityX = 5.0f;
-    private float sensivityY = 2.0f;
+    private float sensivityX = 4.0f;
+    private float sensivityY = 1.0f;
 
     public override Vector3 ProcessMotion(Vector3 input)
     {

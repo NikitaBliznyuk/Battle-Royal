@@ -21,8 +21,8 @@ public class CameraMotor : MonoBehaviour
     {
         Vector3 direction = Vector3.zero;
 
-        direction.x = Input.GetAxis("Horizontal");
-        direction.z = Input.GetAxis("Vertical");
+        direction.x = Input.GetAxis("Horizontal2");
+        direction.z = Input.GetAxis("Vertical2");
 
         direction = direction.magnitude > 1 ? direction.normalized : direction;
 

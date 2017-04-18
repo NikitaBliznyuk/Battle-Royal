@@ -22,6 +22,7 @@ public abstract class BaseMotor : MonoBehaviour
 
     public float VerticalVelocity { set; get; }
     public Vector3 MoveVector { set; get; }
+    public Quaternion RotationQuaternion { set; get; }
 
     protected abstract void UpdateMotor();
 
@@ -42,6 +43,12 @@ public abstract class BaseMotor : MonoBehaviour
     protected virtual void Move()
     {
         controller.Move(MoveVector * Time.deltaTime);
+    }
+
+    protected virtual void Rotate()
+    {
+        if(RotationQuaternion != Quaternion.identity)
+            thisTransform.rotation = RotationQuaternion;
     }
 
     public virtual bool Grounded()
