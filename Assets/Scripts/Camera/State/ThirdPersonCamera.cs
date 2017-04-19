@@ -44,6 +44,20 @@ public class ThirdPersonCamera : BaseCameraState
     {
         Vector3 direction = new Vector3(0, 0, -distance);
         Quaternion rotation = Quaternion.Euler(currentY, currentX, 0);
-        return lookAt.position + offset + rotation * direction;
+
+        direction = lookAt.position + offset + rotation * direction;
+
+        RaycastHit hit;
+        if(Physics.Linecast(lookAt.position, direction - offset, out hit))
+        {
+            if(hit.collider.CompareTag("Terrain"))
+            {
+                direction = hit.point + hit.normal * 0.2f;
+            }
+        }
+
+        direction = Vector3.Lerp(cameraContainer.position, direction, Time.deltaTime * 10);
+
+        return direction;
     }
 }
