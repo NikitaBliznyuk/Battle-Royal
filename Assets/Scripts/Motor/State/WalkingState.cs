@@ -14,7 +14,10 @@ public class WalkingState : BaseState
 
     public override Quaternion ProcessRotation(Vector3 input)
     {
-        return Quaternion.FromToRotation(Vector3.forward, input);
+        if (input != Vector3.zero)
+            return Quaternion.FromToRotation(Vector3.forward, input);
+        else
+            return base.ProcessRotation(input);
     }
 
     public override void Construct()
